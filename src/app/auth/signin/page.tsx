@@ -10,7 +10,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -20,9 +19,9 @@ import LoadingButton from "@/components/loading-button";
 import { handleCredentialsSignin } from "@/app/actions/authActions";
 import { useState } from "react";
 import ErrorMessage from "@/components/error-message";
-
 export default function SignIn() {
   const [globalError, setGlobalError] = useState<string>("");
+
   const form = useForm<z.infer<typeof signInSchema>>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
@@ -38,12 +37,12 @@ export default function SignIn() {
         setGlobalError(result.message);
       }
     } catch (error) {
-      console.log(error);
+      console.log("An unexpected error occurred. Please try again.");
     }
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen p-4">
+    <div className="grow flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center text-gray-800">
@@ -91,6 +90,7 @@ export default function SignIn() {
                 )}
               />
 
+              {/* Submit button will go here */}
               <LoadingButton pending={form.formState.isSubmitting}>
                 Sign In
               </LoadingButton>
